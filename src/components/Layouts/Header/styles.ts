@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
+		color: 'black',
 	},
 	inputRoot: {
 		width: '100%',
