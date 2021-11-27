@@ -19,7 +19,11 @@ const Styles = makeStyles((theme) => ({
 
 const GlobalContainer = ({ children }: IProps) => {
 	const classes = Styles();
-	return <Container className={classes.root}>{children}</Container>;
+	return (
+		<Container className={classes.root}>
+			<div>{children}</div>
+		</Container>
+	);
 };
 
 export default GlobalContainer;
