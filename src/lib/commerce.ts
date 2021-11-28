@@ -1,8 +1,9 @@
 import CommerceSDK from '@chec/commerce.js';
 
-const PUBLIC_ENV = process.env.NEXT_PUBLIC_CHEC_PUBLIC_API_KEY;
+const PUBLIC_ENV = process.env.REACT_APP_CHEC_PUBLIC_KEY;
 
 const checAPIKey = PUBLIC_ENV ? PUBLIC_ENV : '';
+
 const devEnvironment = process.env.NODE_ENV === 'development';
 
 // Commerce.js constructor options

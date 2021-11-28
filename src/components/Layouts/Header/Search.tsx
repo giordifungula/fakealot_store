@@ -3,24 +3,26 @@ import { useHistory } from 'react-router-dom';
 // @material-ui
 import { Box, InputBase, Button } from '@material-ui/core/';
 import SearchIcon from '@material-ui/icons/Search';
+// @local
 import useStyles from './styles';
+import AppContext from '../../../AppContext';
 
 const Search = () => {
-	// consume searchProducts from context?
+	const { searchProducts } = React.useContext(AppContext);
+
 	const history = useHistory();
 	const classes = useStyles();
 	const [query, setQuery] = useState('');
 
 	const storeQuery = (value: string) => {
 		const query = value.split(' ').join(' ');
-		console.log('query', query);
 		setQuery(query);
 	};
 
 	const search = () => {
 		if (query.length > 0) {
 			setQuery('');
-			// searchProducts(query);
+			searchProducts(query);
 			history.push(`/search/${query}`);
 			// todo add the search page
 		}
