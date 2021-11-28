@@ -5,11 +5,8 @@ import { Box, InputBase, Button } from '@material-ui/core/';
 import SearchIcon from '@material-ui/icons/Search';
 import useStyles from './styles';
 
-interface IProps {
-	searchProducts?: () => void;
-}
-
-const Search = ({ searchProducts }: IProps) => {
+const Search = () => {
+	// consume searchProducts from context?
 	const history = useHistory();
 	const classes = useStyles();
 	const [query, setQuery] = useState('');
