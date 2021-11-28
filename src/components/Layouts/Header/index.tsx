@@ -7,13 +7,12 @@ import GlobalContainer from 'components/utils/Container';
 import useStyles from './styles';
 import Brand from './Brand';
 import Search from './Search';
+import AppContext from '../../../AppContext';
 
 // todo header needs to take in loading state, search items?
-interface IHeaderProps {
-	loading?: boolean;
-}
 
-const Header = ({ loading }: IHeaderProps) => {
+const Header = () => {
+	const { isLoading } = React.useContext(AppContext);
 	const classes = useStyles();
 
 	return (
@@ -26,7 +25,7 @@ const Header = ({ loading }: IHeaderProps) => {
 				backgroundColor: '#fff',
 			}}
 		>
-			{loading && <LinearProgress color="secondary" />}
+			{isLoading && <LinearProgress color="secondary" />}
 			<GlobalContainer>
 				<Toolbar disableGutters className={classes.toolBar}>
 					<Grid container spacing={2} alignItems="center">

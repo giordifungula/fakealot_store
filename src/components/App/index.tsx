@@ -1,5 +1,4 @@
 import React from 'react';
-import Home from 'components/Home';
 import {
 	Switch,
 	withRouter,
@@ -8,6 +7,7 @@ import {
 	Redirect,
 } from 'react-router-dom';
 // @components
+import Home from 'components/Home';
 import Header from 'components/Layouts/Header';
 import About from 'components/About';
 

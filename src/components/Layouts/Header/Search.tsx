@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+// @material-ui
+import { Box, InputBase, Button } from '@material-ui/core/';
 import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import useStyles from './styles';
 
 interface IProps {
@@ -17,6 +16,7 @@ const Search = ({ searchProducts }: IProps) => {
 
 	const storeQuery = (value: string) => {
 		const query = value.split(' ').join(' ');
+		console.log('query', query);
 		setQuery(query);
 	};
 
@@ -25,6 +25,7 @@ const Search = ({ searchProducts }: IProps) => {
 			setQuery('');
 			// searchProducts(query);
 			history.push(`/search/${query}`);
+			// todo add the search page
 		}
 	};
 
@@ -45,7 +46,7 @@ const Search = ({ searchProducts }: IProps) => {
 			<Box flexGrow={1}>
 				<div className={classes.searchBox}>
 					<InputBase
-						placeholder="Search products, brands and categories"
+						placeholder="Search for any product, item "
 						value={query}
 						onChange={(e) => {
 							storeQuery(e.target.value);

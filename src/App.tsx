@@ -7,13 +7,24 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import RoutesApp from 'components/App';
 // @local
 import theme from './theme';
+import AppContext from './AppContext';
 
-const App = () => (
-	<BrowserRouter>
-		<ThemeProvider theme={theme}>
-			<CssBaseline />
-			<RoutesApp />
-		</ThemeProvider>
-	</BrowserRouter>
-);
+const App = () => {
+	const [isLoading, setIsLoading] = React.useState(true);
+
+	const handleLoading = () => {
+		return;
+	};
+
+	return (
+		<BrowserRouter>
+			<ThemeProvider theme={theme}>
+				<CssBaseline />
+				<AppContext.Provider value={{ isLoading, handleLoading }}>
+					<RoutesApp />
+				</AppContext.Provider>
+			</ThemeProvider>
+		</BrowserRouter>
+	);
+};
 export default App;
