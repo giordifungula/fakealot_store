@@ -8,11 +8,10 @@ import useStyles from './styles';
 import AppContext from '../../../AppContext';
 
 const Search = () => {
-	const { searchProducts } = React.useContext(AppContext);
+	const { searchProducts, setQuery, query } = React.useContext(AppContext);
 
 	const history = useHistory();
 	const classes = useStyles();
-	const [query, setQuery] = useState('');
 
 	const storeQuery = (value: string) => {
 		const query = value.split(' ').join(' ');
@@ -45,7 +44,7 @@ const Search = () => {
 			<Box flexGrow={1}>
 				<div className={classes.searchBox}>
 					<InputBase
-						placeholder="Search for any product, item "
+						placeholder="Search for any product, products, or brands"
 						value={query}
 						onChange={(e) => {
 							storeQuery(e.target.value);
