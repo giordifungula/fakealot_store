@@ -17,7 +17,7 @@ const App = () => {
 	const [productsList, setProductsList] = useState<Product[] | null>(null);
 	const [cart, setCart] = useState<Cart | null>(null);
 	const [sortedProducts, setSortedProducts] = useState<Product[]>([]);
-	const [query, setQuery] = useState<string>('');
+	const [query, setQuery] = useState<string | null>(null);
 
 	const searchProducts = async (search: string) => {
 		setIsLoading(true);

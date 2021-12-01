@@ -15,12 +15,13 @@ const Search = () => {
 
 	const storeQuery = (value: string) => {
 		const query = value.split(' ').join(' ');
-		setQuery(query);
+		setQuery ? setQuery(query) : null;
 	};
 
 	const search = () => {
-		if (query.length > 0) {
-			setQuery('');
+		if (query && query.length > 0) {
+			setQuery ? setQuery('') : null;
+
 			searchProducts(query);
 			history.push(`/search/${query}`);
 			// todo add the search page

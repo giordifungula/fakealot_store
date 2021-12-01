@@ -11,8 +11,8 @@ interface IAppContext {
 	cart: Cart | null;
 	// todo add more props here
 	searchProducts: (searchTerm: string) => void;
-	setQuery: React.Dispatch<React.SetStateAction<string>> | string;
-	query: string;
+	setQuery: React.Dispatch<React.SetStateAction<string | null>> | null;
+	query: string | null;
 }
 
 // default state
@@ -22,8 +22,8 @@ const defaultState: IAppContext = {
 	cart: null,
 	sortedProducts: [],
 	searchProducts: (searchTerm: string) => true,
-	setQuery: '',
-	query: '',
+	setQuery: null,
+	query: null,
 };
 
 export default createContext<IAppContext>(defaultState);
