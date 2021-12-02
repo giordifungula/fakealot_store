@@ -2,6 +2,7 @@ import React from 'react';
 // @components
 import GlobalContainer from 'components/utils/Container';
 import Query from 'components/Pages/Query';
+import CurrentPath from 'components/Pages/CurrentPage';
 import AppContext from '../../AppContext';
 
 const SearchContainer = () => {
@@ -10,7 +11,7 @@ const SearchContainer = () => {
 	return (
 		<GlobalContainer>
 			<Query sortedProducts={sortedProducts} query={query}>
-				<h1>Hello</h1>
+				<CurrentPath />
 			</Query>
 		</GlobalContainer>
 	);

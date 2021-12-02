@@ -1,4 +1,5 @@
 import React from 'react';
+import { Product } from '@chec/commerce.js/types/product';
 import { useHistory, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
@@ -14,15 +15,15 @@ const Styles = makeStyles((theme) => ({
 		alignItems: 'center',
 	},
 	btn: {
-		color: theme.palette.primary.main,
+		color: 'white',
 		margin: '10px 0 40px 0',
 	},
 }));
 
 interface IQueryProps {
-	query: string;
+	query: string | null;
+	sortedProducts: Product[] | null;
 	children: React.ReactNode;
-	sortedProducts: any;
 }
 
 const Query = ({ children, sortedProducts, query }: IQueryProps) => {
@@ -30,13 +31,21 @@ const Query = ({ children, sortedProducts, query }: IQueryProps) => {
 	const history = useHistory();
 	const { name } = useParams<{ name: string }>();
 
+	const [saveQuery, setSaveQuery] = React.useState('');
+
 	if (name.trim().length === 0) history.push('/');
 
 	const searchIcon = 'https://img.icons8.com/ios/50/000000/search--v1.png';
 
+	React.useEffect(() => {
+		if (query) {
+			setSaveQuery(query);
+		}
+	}, [query]);
+
 	return (
 		<section className={classes.root}>
-			{sortedProducts.length ? (
+			{sortedProducts && sortedProducts.length ? (
 				<div style={{ width: '100%' }}>{children}</div>
 			) : (
 				<div
@@ -67,16 +76,14 @@ const Query = ({ children, sortedProducts, query }: IQueryProps) => {
 							fontWeight: 500,
 							marginBottom: 15,
 						}}
-					>{`There are no results for "${
-						query.length === 0 ? name : query
-					}" yet.`}</h2>
+					>{`There are no results for "${saveQuery}" yet.`}</h2>
 					<p>
 						- Check your spelling for typing errors
 						<br />- Try searching with short and simple keywords
 						<br />- Try searching more general terms - you can then
 						filter the search results
 					</p>
-					<Link to="/">
+					<Link to="/" style={{ textDecoration: 'none' }}>
 						<Button
 							className={classes.btn}
 							variant="contained"
