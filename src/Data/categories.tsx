@@ -10,7 +10,13 @@ import {
 import { BiHomeAlt, BiShoppingBag } from 'react-icons/bi';
 import { FaHeartbeat, FaShoppingCart } from 'react-icons/fa';
 
-const categories = [
+export interface ICategory {
+	name: string;
+	icon: React.ReactNode;
+	path: string;
+}
+
+export const categories = [
 	{
 		name: 'Women',
 		path: 'women',
@@ -66,6 +72,4 @@ const categories = [
 		path: 'fashion',
 		icon: <GiTShirt />,
 	},
-];
-
-export default categories;
+] as ICategory[];

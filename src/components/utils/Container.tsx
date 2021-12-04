@@ -7,7 +7,7 @@ interface IProps {
 	children: React.ReactNode;
 }
 
-const Styles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
 	root: {
 		maxWidth: '1280px',
 		'@media (max-width: 1200px)': {
@@ -18,7 +18,7 @@ const Styles = makeStyles((theme) => ({
 }));
 
 const GlobalContainer = ({ children }: IProps) => {
-	const classes = Styles();
+	const classes = useStyles();
 	return (
 		<Container className={classes.root}>
 			<div>{children}</div>

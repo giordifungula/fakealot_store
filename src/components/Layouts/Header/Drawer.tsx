@@ -13,7 +13,7 @@ import {
 import { GiHamburgerMenu } from 'react-icons/gi';
 // @local
 import logo from '../../../assets/logo.svg';
-import data from '../../../Data/categories';
+import { categories } from '../../../Data/categories';
 
 const useStyles = makeStyles({
 	list: {
@@ -73,7 +73,7 @@ export default function TempDrawer() {
 			</div>
 			<Divider />
 			<List>
-				{data.map(({ icon, name, path }, index) => (
+				{categories.map(({ icon, name, path }, index) => (
 					<Link
 						to={`/search/${path}`}
 						key={index}

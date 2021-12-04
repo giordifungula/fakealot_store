@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-const Styles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
 	root: {
 		marginTop: `${76}px`,
 		marginBottom: 16,
@@ -45,7 +45,7 @@ interface IQueryProps {
 }
 
 const Query = ({ children, sortedProducts, query }: IQueryProps) => {
-	const classes = Styles();
+	const classes = useStyles();
 	const history = useHistory();
 	const { name } = useParams<{ name: string }>();
 

@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import logo from '../../../assets/logo.svg';
 import Drawer from './Drawer';
 
-const styles = makeStyles(() => ({
+const useStyles = makeStyles(() => ({
 	root: {
 		display: 'flex',
 		height: '40px',
@@ -26,7 +26,8 @@ const styles = makeStyles(() => ({
 }));
 
 const Brand = () => {
-	const classes = styles();
+	const classes = useStyles();
+
 	return (
 		<div className={classes.root}>
 			<div>

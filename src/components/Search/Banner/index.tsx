@@ -50,7 +50,7 @@ const Banner = ({
 					</div>
 				)}
 				<Grid container spacing={1}>
-					{Array.isArray(products)
+					{products
 						? products.slice(0, numOfProds).map((product, i) => (
 								<Grid item xs={3} key={i}>
 									<Link
