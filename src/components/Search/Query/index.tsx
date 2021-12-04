@@ -2,6 +2,7 @@ import React from 'react';
 import { Product } from '@chec/commerce.js/types/product';
 import { useHistory, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+// @material-ui
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -17,6 +18,23 @@ const Styles = makeStyles((theme) => ({
 	btn: {
 		color: 'white',
 		margin: '10px 0 40px 0',
+	},
+	searchIconDiv: {
+		background: 'white',
+		borderRadius: 100,
+		width: 100,
+		height: 100,
+		margin: 'auto',
+	},
+	searchResultText: {
+		fontSize: '1rem',
+		fontWeight: 500,
+		marginBottom: 15,
+	},
+	searchDivContainer: {
+		minHeight: 300,
+		textAlign: 'center',
+		marginTop: '50px',
 	},
 }));
 
@@ -48,35 +66,17 @@ const Query = ({ children, sortedProducts, query }: IQueryProps) => {
 			{sortedProducts && sortedProducts.length ? (
 				<div style={{ width: '100%' }}>{children}</div>
 			) : (
-				<div
-					style={{
-						minHeight: 300,
-						textAlign: 'center',
-						marginTop: '50px',
-					}}
-				>
-					<div
-						style={{
-							background: 'white',
-							borderRadius: 100,
-							width: 100,
-							height: 100,
-							margin: 'auto',
-						}}
-					>
+				<div className={classes.searchDivContainer}>
+					<div className={classes.searchIconDiv}>
 						<img
 							style={{ height: '100%' }}
 							src={searchIcon}
-							alt=""
+							alt="searchIcon"
 						/>
 					</div>
 					<h2
-						style={{
-							fontSize: '1rem',
-							fontWeight: 500,
-							marginBottom: 15,
-						}}
-					>{`There are no results for "${saveQuery}" yet.`}</h2>
+						className={classes.searchResultText}
+					>{`There are no results for "${saveQuery}" at this stage 😦. But we are on it!`}</h2>
 					<p>
 						- Check your spelling for typing errors
 						<br />- Try searching with short and simple keywords
@@ -87,7 +87,7 @@ const Query = ({ children, sortedProducts, query }: IQueryProps) => {
 						<Button
 							className={classes.btn}
 							variant="contained"
-							color="secondary"
+							color="primary"
 							size="large"
 						>
 							Go To HomePage

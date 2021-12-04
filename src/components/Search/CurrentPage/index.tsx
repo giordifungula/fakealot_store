@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useParams, Link } from 'react-router-dom';
+// @material-ui
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -39,7 +40,7 @@ const useStyles = makeStyles(() => ({
 	},
 }));
 
-const CurrentPath = () => {
+const CurrentPage = () => {
 	const location = useLocation();
 	const { name: slug } = useParams<{ name: string }>();
 
@@ -61,4 +62,4 @@ const CurrentPath = () => {
 	);
 };
 
-export default CurrentPath;
+export default CurrentPage;

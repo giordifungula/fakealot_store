@@ -10,7 +10,7 @@ import {
 import Home from 'components/Home';
 import Header from 'components/Layouts/Header';
 import About from 'components/About';
-import SearchContainer from 'components/container/SearchContainer';
+import SearchContainer from 'components/Search';
 
 const App = ({ location }: RouteComponentProps) => {
 	return (

@@ -1,9 +1,9 @@
 import React from 'react';
 // @components
 import GlobalContainer from 'components/utils/Container';
-import Query from 'components/Pages/Query';
-import CurrentPath from 'components/Pages/CurrentPage';
-import Banner from 'components/Banner/Banner';
+import Query from './Query';
+import CurrentPath from './CurrentPage';
+import Banner from './Banner';
 import AppContext from '../../AppContext';
 
 const SearchContainer = () => {

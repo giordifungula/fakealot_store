@@ -9,8 +9,6 @@ import Brand from './Brand';
 import Search from './Search';
 import AppContext from '../../../AppContext';
 
-// todo header needs to take in loading state, search items?
-
 const Header = () => {
 	const { isLoading } = React.useContext(AppContext);
 	const classes = useStyles();
