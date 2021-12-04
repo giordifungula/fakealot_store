@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 // @material-ui
 import { makeStyles } from '@material-ui/core/styles';
 // @local
-import logo from '../../../assets/logo.svg';
+import logo from '../../../assets/logo.png';
 import Drawer from './Drawer';
 
 const useStyles = makeStyles(() => ({
 	root: {
 		display: 'flex',
-		height: '40px',
-		margin: '15px auto',
+		height: '48px',
+		margin: '10px auto',
 	},
 	logo: {
 		height: '30px',
@@ -23,6 +23,14 @@ const useStyles = makeStyles(() => ({
 			display: 'none',
 		},
 	},
+	FTextStyles: {
+		color: '#4C4C4F',
+		fontSize: '3em',
+		fontWeight: 600,
+		background: 'transparent',
+		margin: '50px auto',
+		marginRight: '2px',
+	},
 }));
 
 const Brand = () => {
@@ -33,8 +41,20 @@ const Brand = () => {
 			<div>
 				<Drawer />
 			</div>
-			<Link to="/">
-				<img className={classes.logo} src={logo} alt="brand-logo" />
+			<Link
+				to="/"
+				style={{
+					textDecoration: 'none',
+					textAlign: 'center',
+				}}
+			>
+				<span className={classes.FTextStyles}>F</span>
+				<img
+					className={classes.logo}
+					style={{ marginLeft: '1px' }}
+					src={logo}
+					alt="brand-logo"
+				/>
 			</Link>
 		</div>
 	);

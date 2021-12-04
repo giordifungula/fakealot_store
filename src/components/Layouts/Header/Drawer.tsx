@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import { GiHamburgerMenu } from 'react-icons/gi';
 // @local
-import logo from '../../../assets/logo.svg';
+import logo from '../../../assets/logo.png';
 import { categories } from '../../../Data/categories';
 
 const useStyles = makeStyles({
@@ -41,8 +41,9 @@ const useStyles = makeStyles({
 	},
 });
 
-export default function TempDrawer() {
+const Drawer = () => {
 	const classes = useStyles();
+
 	const [state, setState] = React.useState({
 		left: false,
 	});
@@ -119,4 +120,6 @@ export default function TempDrawer() {
 			</SwipeableDrawer>
 		</div>
 	);
-}
+};
+
+export default Drawer;

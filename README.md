@@ -44,6 +44,13 @@ Why am I building this application
 -   react-icons
 -   @chec/commerce.js
 
+# References
+
+-   https://unsplash.com/photos/MP56QwyNC8c
+-   https://unsplash.com/photos/jo8C9bt3uo8
+-   https://unsplash.com/photos/4Hmj9gkyM6c
+-   https://unsplash.com/photos/DnJioJ8nhxI
+
 Giordi Fungula
 
 # Getting Started with Create React App

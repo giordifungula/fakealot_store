@@ -1,17 +1,41 @@
 import React from 'react';
-import { Product } from '@chec/commerce.js/types/product';
 // @components
 import GlobalContainer from 'components/utils/Container';
+import { categories } from 'Data/categories';
+import AppContext from 'AppContext';
+// @local
+import Hero from './Hero';
+import HeroCarousel from './Hero/Carousel';
+import InfoLink from './Hero/infoLink';
 
-interface IProps {
-	products: Product | null;
-	searchProducts: (searchText: string) => void; // TODO: define type
-}
+const Home = () => {
+	const { sortedProducts, query, searchProducts } =
+		React.useContext(AppContext);
 
-const Home = ({ products }: IProps) => {
+	// todo add sortedProducts to context
+
 	return (
 		<GlobalContainer>
-			<h1 style={{ marginTop: '20em' }}>Home</h1>
+			<Hero searchProducts={searchProducts}>
+				<Hero.Categories
+					categories={categories}
+					searchProducts={searchProducts}
+				/>
+				<Hero.ImageSlide>
+					<HeroCarousel />
+				</Hero.ImageSlide>
+				<Hero.InformativeLinks>
+					<InfoLink
+						path="/abc"
+						icon="abc"
+						title="ABC"
+						subTitle="ABC"
+					/>
+					{/* todo add more info links here */}
+				</Hero.InformativeLinks>
+				{/* todo add images here */}
+			</Hero>
+			{/* Add Product Components Below */}
 		</GlobalContainer>
 	);
 };
