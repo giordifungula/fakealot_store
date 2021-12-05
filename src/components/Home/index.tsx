@@ -21,10 +21,10 @@ const Home = () => {
 					categories={categories}
 					searchProducts={searchProducts}
 				/>
-				<Hero.ImageSlide>
+				<Hero.Slider>
 					<HeroCarousel />
-				</Hero.ImageSlide>
-				<Hero.InformativeLinks>
+				</Hero.Slider>
+				<Hero.InformationLinks>
 					<InfoLink
 						path="/abc"
 						icon="abc"
@@ -32,7 +32,7 @@ const Home = () => {
 						subTitle="ABC"
 					/>
 					{/* todo add more info links here */}
-				</Hero.InformativeLinks>
+				</Hero.InformationLinks>
 				{/* todo add images here */}
 			</Hero>
 			{/* Add Product Components Below */}

@@ -4,13 +4,10 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+// @components
+import { IHeroProps } from 'components/Home/Hero';
 // @local
 import { ICategory } from '../../Data/categories';
-
-export interface ICategoriesProps {
-	categories: ICategory[];
-	searchProducts: (category: string) => void;
-}
 
 const useStyles = makeStyles((theme) => ({
 	link: {
@@ -18,17 +15,34 @@ const useStyles = makeStyles((theme) => ({
 		'&:hover': {
 			background: theme.palette.primary.main,
 			color: '#fff',
+			transition: 'all 0.3s ease-in-out',
 		},
+	},
+	listItemButton: {
+		display: 'flex',
+		alignItems: 'center',
+		paddingLeft: '8px',
+		height: '32px',
+	},
+	iconStyles: {
+		width: '20px',
+		fontSize: '20px',
+	},
+	iconText: {
+		display: 'flex',
+		alignItems: 'center',
+		fontSize: '.80rem',
+		padding: ' 0 0 4px 4px',
 	},
 }));
 
-const Categories = ({ categories, searchProducts }: ICategoriesProps) => {
+const Categories = ({ categories, searchProducts }: IHeroProps) => {
 	const classes = useStyles();
-	console.log('category', categories);
 
 	return (
 		<List component="nav" aria-label="main categories">
 			{categories &&
+				searchProducts &&
 				categories.map(({ name, icon, path }, i) => (
 					<Link
 						to={`/search/${path}`}
@@ -38,32 +52,12 @@ const Categories = ({ categories, searchProducts }: ICategoriesProps) => {
 						<div onClick={() => searchProducts(path)}>
 							<ListItem
 								button
-								style={{
-									display: 'flex',
-									alignItems: 'center',
-									paddingLeft: '8px',
-									height: '32px',
-								}}
-								className={classes.link}
+								className={`${classes.link} ${classes.listItemButton}`}
 							>
-								<span
-									style={{
-										width: '20px',
-										fontSize: '20px',
-									}}
-								>
+								<span className={classes.iconStyles}>
 									{icon}
 								</span>
-								<span
-									style={{
-										display: 'flex',
-										alignItems: 'center',
-										fontSize: '.80rem',
-										padding: ' 0 0 4px 4px',
-									}}
-								>
-									{name}
-								</span>
+								<span className={classes.iconText}>{name}</span>
 							</ListItem>
 						</div>
 					</Link>

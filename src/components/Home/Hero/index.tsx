@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 // @components
 import Categories from 'components/utils/Categories';
-import { ICategoriesProps } from 'components/utils/Categories';
+import { ICategory } from 'Data/categories';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -70,10 +70,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-interface IHeroProps {
-	children: React.ReactNode;
+export interface IHeroProps {
+	children?: React.ReactNode; // not every component has children
 	searchProducts?: (value: string) => void;
 	elementType?: keyof JSX.IntrinsicElements;
+	categories?: ICategory[]; // only first component needs this
 }
 
 const Hero = ({
@@ -89,24 +90,24 @@ const Hero = ({
 	);
 };
 
-Hero.Categories = ({ categories, searchProducts }: ICategoriesProps) => {
+Hero.Categories = ({ categories, searchProducts }: IHeroProps) => {
 	const classes = useStyles();
 	return (
 		<div className={classes.categories}>
 			<Paper className={classes.paper}>
-				<Categories
-					categories={categories}
-					searchProducts={searchProducts}
-				/>
+				{categories && searchProducts ? (
+					<Categories
+						categories={categories}
+						searchProducts={searchProducts}
+					/>
+				) : // this does not need children
+				null}
 			</Paper>
 		</div>
 	);
 };
 
-Hero.ImageSlide = ({
-	children,
-	elementType: ElementType = 'div',
-}: IHeroProps) => {
+Hero.Slider = ({ children, elementType: ElementType = 'div' }: IHeroProps) => {
 	const classes = useStyles();
 	return (
 		<ElementType>
@@ -115,7 +116,7 @@ Hero.ImageSlide = ({
 	);
 };
 
-Hero.InformativeLinks = ({
+Hero.InformationLinks = ({
 	children,
 	elementType: ElementType = 'div',
 }: IHeroProps) => {
