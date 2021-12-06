@@ -68,6 +68,13 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: '16px',
 		padding: '10px 5px',
 	},
+	gifphy: {
+		height: '100%',
+		backgroundImage: 'url(./images/animated.gif)',
+		backgroundSize: 'cover',
+		backgroundRepeat: 'repeat',
+		backgroundPosition: 'center',
+	},
 }));
 
 export interface IHeroProps {
@@ -130,15 +137,7 @@ Hero.InformationLinks = ({
 					</Paper>
 				</Box>
 				<Box flexGrow={1}>
-					<Paper
-						style={{
-							height: '100%',
-							backgroundImage: 'url(./images/Top-Right.gif)',
-							backgroundSize: 'cover',
-							backgroundRepeat: 'repeat',
-							backgroundPosition: 'center',
-						}}
-					/>
+					<Paper className={classes.gifphy} />
 				</Box>
 			</Box>
 		</ElementType>

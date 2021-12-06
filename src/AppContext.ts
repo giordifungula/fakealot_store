@@ -1,7 +1,6 @@
 import { createContext } from 'react';
 import { Product } from '@chec/commerce.js/types/product';
 import { Cart } from '@chec/commerce.js/types/cart';
-import { BiAngry } from 'react-icons/bi';
 
 // create the context interface
 interface IAppContext {

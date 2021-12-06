@@ -42,9 +42,8 @@ const useStyles = makeStyles(() => ({
 
 const CurrentPage = () => {
 	const location = useLocation();
-	const { name: slug } = useParams<{ name: string }>();
-
 	const classes = useStyles();
+	const { name: slug } = useParams<{ name: string }>();
 
 	return (
 		<Breadcrumbs aria-label="breadcrumb" className={classes.root}>

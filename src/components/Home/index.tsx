@@ -7,12 +7,17 @@ import AppContext from 'AppContext';
 import Hero from './Hero';
 import HeroCarousel from './Hero/Carousel';
 import InfoLink from './Hero/infoLink';
+import QuickIconsLinks from './QuickIconsLinks';
 
 const Home = () => {
 	const { sortedProducts, query, searchProducts } =
 		React.useContext(AppContext);
 
-	// todo add sortedProducts to context
+	const infoIcon = 'https://img.icons8.com/ios-glyphs/30/000000/info.png';
+	const contactIcon =
+		'https://img.icons8.com/ios-glyphs/30/000000/contact-card.png';
+	const questionIcon =
+		'https://img.icons8.com/ios-glyphs/30/000000/question.png';
 
 	return (
 		<GlobalContainer>
@@ -26,16 +31,29 @@ const Home = () => {
 				</Hero.Slider>
 				<Hero.InformationLinks>
 					<InfoLink
-						path="/abc"
-						icon="abc"
-						title="ABC"
-						subTitle="ABC"
+						path="/faq"
+						icon={questionIcon}
+						title="FAQ"
+						subTitle="Frequently Asked Questions"
+					/>
+					<InfoLink
+						path="/about"
+						icon={infoIcon}
+						title="About Us"
+						subTitle="About Us"
+					/>
+					<InfoLink
+						path="/contact"
+						icon={contactIcon}
+						title="Contact Us"
+						subTitle="Talk to us"
 					/>
 					{/* todo add more info links here */}
 				</Hero.InformationLinks>
 				{/* todo add images here */}
 			</Hero>
 			{/* Add Product Components Below */}
+			<QuickIconsLinks searchProducts={searchProducts} />
 		</GlobalContainer>
 	);
 };
