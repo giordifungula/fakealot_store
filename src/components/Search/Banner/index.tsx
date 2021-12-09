@@ -10,13 +10,14 @@ import {
 	CardActionArea,
 	CardMedia,
 	Grid,
+	GridSize,
 } from '@material-ui/core';
 import useStyles from './styles';
 
 interface IProps {
 	title?: string;
 	getProduct?: Product | null;
-	xs: number;
+	xs?: boolean | GridSize;
 	numOfProds: number;
 	products: Product[] | null;
 }
@@ -25,7 +26,7 @@ const Banner = ({
 	products,
 	title,
 	numOfProds = 6,
-	xs = 3,
+	xs = 2,
 	getProduct,
 }: IProps) => {
 	const classes = useStyles({});
@@ -40,24 +41,17 @@ const Banner = ({
 				>
 					{title}
 				</Typography>
-				{numOfProds > 6 && (
-					<div style={{ marginBottom: 10 }}>
-						<p style={{ paddingBottom: 20, margin: 0 }}>
-							{(products && products.length) || [].length}{' '}
-							product(s) found
-						</p>
-						<Divider />
-					</div>
-				)}
+
 				<Grid container spacing={1}>
 					{products
-						? products.slice(0, numOfProds).map((product, i) => (
-								<Grid item xs={3} key={i}>
+						? products.slice(0, 6).map((product, i) => (
+								<Grid item sm={xs} key={i}>
 									<Link
 										key={i}
 										to={`/product/${product.name
 											.split(' ')
 											.join('-')}/${product.id}`}
+										className={classes.link}
 									>
 										<Card elevation={0}>
 											<CardActionArea key={i}>
@@ -71,7 +65,7 @@ const Banner = ({
 																width: '100%',
 															}}
 															component="img"
-															alt="Product"
+															alt={product.name}
 															image={image.url}
 														/>
 													))}
@@ -87,6 +81,7 @@ const Banner = ({
 														fontSize: '16px',
 														margin: '5px',
 														fontWeight: 'bold',
+														textDecoration: 'none',
 													}}
 												>
 													{

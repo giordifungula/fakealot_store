@@ -9,8 +9,8 @@ import QuickIconLink from './QuickIconLink';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		margin: '0px 0px 16px -8px',
-		'@media (max-width: 960px)': {
-			display: 'none',
+		'@media (max-width: 660px)': {
+			// display: 'none',
 		},
 	},
 }));

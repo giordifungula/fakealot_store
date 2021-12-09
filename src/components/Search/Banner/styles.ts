@@ -19,6 +19,7 @@ export default makeStyles((theme) => ({
 		margin: '5px',
 		whiteSpace: 'nowrap',
 		overflow: 'hidden',
+		textDecoration: 'none',
 		textOverflow: 'ellipsis',
 		'@media (max-width: 1280px)': {
 			width: '150px',
@@ -51,6 +52,13 @@ export default makeStyles((theme) => ({
 	singleBanner: {
 		'@media (max-width: 800px)': {
 			display: 'none',
+		},
+	},
+	link: {
+		textDecoration: 'none',
+		transition: 'transform 1.5s',
+		'&:hover': {
+			transform: 'scale(1.5)',
 		},
 	},
 }));

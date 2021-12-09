@@ -3,6 +3,8 @@ import React from 'react';
 import GlobalContainer from 'components/utils/Container';
 import { categories } from 'Data/categories';
 import AppContext from 'AppContext';
+// @components
+import Gallery from 'components/Gallery';
 // @local
 import Hero from './Hero';
 import HeroCarousel from './Hero/Carousel';
@@ -10,8 +12,7 @@ import InfoLink from './Hero/infoLink';
 import QuickIconsLinks from './QuickIconsLinks';
 
 const Home = () => {
-	const { sortedProducts, query, searchProducts } =
-		React.useContext(AppContext);
+	const { searchProducts, productsList } = React.useContext(AppContext);
 
 	const infoIcon = 'https://img.icons8.com/ios-glyphs/30/000000/info.png';
 	const contactIcon =
@@ -54,6 +55,7 @@ const Home = () => {
 			</Hero>
 			{/* Add Product Components Below */}
 			<QuickIconsLinks searchProducts={searchProducts} />
+			<Gallery title="Most Popular" products={productsList} />
 		</GlobalContainer>
 	);
 };

@@ -8,6 +8,7 @@ import AppContext from '../../AppContext';
 
 const SearchContainer = () => {
 	const { sortedProducts, query } = React.useContext(AppContext);
+	// TODO: Filter based on query instead from API?
 
 	return (
 		<GlobalContainer>

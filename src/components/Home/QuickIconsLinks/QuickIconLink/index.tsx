@@ -1,8 +1,7 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core';
+// @material-ui
+import { Grid, Paper, makeStyles } from '@material-ui/core';
 import { IQuickIconLinks } from 'Data/quickIconLinks';
 
 interface IQuickIconLink extends IQuickIconLinks {
@@ -29,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
-		// can text align center too
 	},
 	item: { background: '' },
 	link: {
@@ -46,7 +44,7 @@ const QuickIconLink = ({
 	const classes = useStyles();
 
 	return (
-		<Grid item xs={6} md={3} onClick={() => searchProducts(path)}>
+		<Grid item xs={12} sm={6} md={3} onClick={() => searchProducts(path)}>
 			<Link to={`/search/${path}`} className={classes.link}>
 				<Paper className={classes.root}>
 					<Grid
