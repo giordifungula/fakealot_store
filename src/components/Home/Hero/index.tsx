@@ -128,6 +128,7 @@ Hero.InformationLinks = ({
 	elementType: ElementType = 'div',
 }: IHeroProps) => {
 	const classes = useStyles();
+
 	return (
 		<ElementType className={classes.informativeLinks}>
 			<Box className={classes.informativeBoxGrid}>

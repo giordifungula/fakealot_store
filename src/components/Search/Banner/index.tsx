@@ -22,7 +22,7 @@ interface IProps {
 	products: Product[] | null;
 }
 
-const Banner = ({
+export const Banner = ({
 	products,
 	title,
 	numOfProds = 6,
@@ -100,5 +100,3 @@ const Banner = ({
 		</div>
 	);
 };
-
-export default Banner;

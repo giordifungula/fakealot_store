@@ -3,7 +3,7 @@ import React from 'react';
 import GlobalContainer from 'components/utils/Container';
 import Query from './Query';
 import CurrentPath from './CurrentPage';
-import Banner from './Banner';
+import { Banner } from './Banner';
 import AppContext from '../../AppContext';
 
 const SearchContainer = () => {

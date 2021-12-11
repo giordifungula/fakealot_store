@@ -12,7 +12,8 @@ import InfoLink from './Hero/infoLink';
 import QuickIconsLinks from './QuickIconsLinks';
 
 const Home = () => {
-	const { searchProducts, productsList } = React.useContext(AppContext);
+	const { searchProducts, productsList, isLoading } =
+		React.useContext(AppContext);
 
 	const infoIcon = 'https://img.icons8.com/ios-glyphs/30/000000/info.png';
 	const contactIcon =
@@ -55,7 +56,11 @@ const Home = () => {
 			</Hero>
 			{/* Add Product Components Below */}
 			<QuickIconsLinks searchProducts={searchProducts} />
-			<Gallery title="Most Popular" products={productsList} />
+			<Gallery
+				title="Most Popular"
+				products={productsList}
+				loading={isLoading}
+			/>
 		</GlobalContainer>
 	);
 };

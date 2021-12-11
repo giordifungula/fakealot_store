@@ -1,7 +1,6 @@
 import React from 'react';
 import { Product } from '@chec/commerce.js/types/product';
-import { useHistory, useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
 // @material-ui
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
