@@ -1,17 +1,35 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 // @material-ui
-import { AppBar, Grid, LinearProgress, Toolbar } from '@material-ui/core';
+import {
+	AppBar,
+	Badge,
+	Grid,
+	IconButton,
+	LinearProgress,
+	MenuItem,
+	Toolbar,
+	Typography,
+} from '@material-ui/core';
 // @components
 import GlobalContainer from 'components/utils/Container';
 // @local
+import { ShoppingCart } from '@material-ui/icons';
 import useStyles from './styles';
 import Brand from './Brand';
 import Search from './Search';
 import AppContext from '../../../AppContext';
 
 const Header = () => {
-	const { isLoading } = React.useContext(AppContext);
+	const { isLoading, cart } = React.useContext(AppContext);
 	const classes = useStyles();
+	const history = useHistory();
+
+	const gotoCheckout = () => {
+		history.push('/checkout');
+	};
+
+	console.log('cart', cart);
 
 	return (
 		<AppBar
@@ -42,7 +60,28 @@ const Header = () => {
 						</Grid>
 						<Grid item xs={5} sm={6} md={4} lg={3}>
 							{/* cart section? */}
-							<h2 style={{ color: 'black' }}>Cart Section</h2>
+							<div>
+								<MenuItem onClick={gotoCheckout}>
+									<IconButton
+										aria-label="Show cart items"
+										color="primary"
+									>
+										<Badge
+											badgeContent={
+												cart
+													? cart.total_unique_items
+													: 0
+											}
+											color="primary"
+										>
+											<ShoppingCart />
+										</Badge>
+									</IconButton>
+									<Typography variant="body1" color="primary">
+										Proceed to checkout
+									</Typography>
+								</MenuItem>
+							</div>
 						</Grid>
 					</Grid>
 				</Toolbar>

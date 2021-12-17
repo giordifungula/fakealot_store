@@ -8,6 +8,7 @@ interface IAppContext {
 	productsList: Product[] | null;
 	sortedProducts: Product[] | null;
 	cart: Cart | null;
+	onAddToCart: (productId: string, quantity: number) => void;
 	// todo add more props here
 	searchProducts: (searchTerm: string) => void;
 	setQuery: React.Dispatch<React.SetStateAction<string | null>> | null;
@@ -19,6 +20,7 @@ const defaultState: IAppContext = {
 	isLoading: false,
 	productsList: [],
 	cart: null,
+	onAddToCart: (id: string, quantity: number) => true,
 	sortedProducts: [],
 	searchProducts: (searchTerm: string) => true,
 	setQuery: null,

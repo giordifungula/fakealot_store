@@ -6,8 +6,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 // @components
 import { IHeroProps } from 'components/Home/Hero';
-// @local
-import { ICategory } from '../../Data/categories';
 
 const useStyles = makeStyles((theme) => ({
 	link: {

@@ -1,13 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { ToastContainer } from 'react-toastify';
 import App from './App';
-// import 'slick-carousel/slick/slick.css';
-// import 'slick-carousel/slick/slick-theme.css';
+import 'react-toastify/dist/ReactToastify.css';
+
+const ToastedApp = () => (
+	<>
+		<ToastContainer />
+		<App />
+	</>
+);
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<ToastedApp />
 	</React.StrictMode>,
 	document.getElementById('root'),
 );

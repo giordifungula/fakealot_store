@@ -8,6 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 // @components
 import RoutesApp from 'components/App';
 // @local
+import { toast } from 'react-toastify';
 import theme from './theme';
 import AppContext from './AppContext';
 import { commerce } from './lib/commerce';
@@ -51,6 +52,12 @@ const App = () => {
 		fetchCart();
 	}, []);
 
+	const addToCartClick = async (productId: string, quantity: number) => {
+		const item = await commerce.cart.add(productId, quantity);
+		setCart(item.cart);
+		toast.success('Item added to cart');
+	};
+
 	return (
 		<BrowserRouter>
 			<ThemeProvider theme={theme}>
@@ -64,6 +71,7 @@ const App = () => {
 						sortedProducts,
 						setQuery,
 						query,
+						onAddToCart: addToCartClick,
 					}}
 				>
 					<RoutesApp />
