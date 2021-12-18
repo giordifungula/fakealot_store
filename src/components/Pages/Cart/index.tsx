@@ -19,7 +19,6 @@ const Page = () => {
 		React.useContext(AppContext);
 
 	const history = useHistory();
-
 	const smallScreen = useTheme().breakpoints.down('sm');
 
 	const goToHomeView = () => history.push('/');

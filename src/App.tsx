@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Product } from '@chec/commerce.js/types/product';
 import { Cart } from '@chec/commerce.js/types/cart';
+import { Order } from '@chec/commerce.js/types/order';
+import { CheckoutCapture } from '@chec/commerce.js/types/checkout-capture';
+import { CheckoutCaptureResponse } from '@chec/commerce.js/types/checkout-capture-response';
 // @material-ui
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -19,6 +22,8 @@ const App = () => {
 	const [cart, setCart] = useState<Cart | null>(null);
 	const [sortedProducts, setSortedProducts] = useState<Product[]>([]);
 	const [query, setQuery] = useState<string | null>(null);
+	const [order, setOrder] = useState<CheckoutCaptureResponse | null>(null);
+	const [errorMessage, setErrorMessage] = useState<unknown | string>('');
 
 	const searchProducts = async (search: string) => {
 		setIsLoading(true);
@@ -84,6 +89,24 @@ const App = () => {
 		toast.success('Cart has been refreshed');
 	};
 
+	const handleCaptureCheckout = async (
+		checkoutTokenId: string,
+		newOrder: CheckoutCapture,
+	) => {
+		try {
+			const incomingOrder = await commerce.checkout.capture(
+				checkoutTokenId,
+				newOrder,
+			);
+			setOrder(incomingOrder);
+			refreshCart();
+		} catch (error: unknown) {
+			console.log('error', error);
+			// const errorMessage = error.message || error;
+			// setErrorMessage(error.data.error.message);
+		}
+	};
+
 	return (
 		<BrowserRouter>
 			<ThemeProvider theme={theme}>
@@ -102,6 +125,7 @@ const App = () => {
 						refreshCart,
 						removeFromCart,
 						updateCartQty,
+						handleCaptureCheckout,
 					}}
 				>
 					<RoutesApp />

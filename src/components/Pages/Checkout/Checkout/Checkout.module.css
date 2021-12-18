@@ -1,0 +1,69 @@
+.appBar {
+  position: 'relative';
+}
+
+.toolbar {
+  display: inline;
+}
+.layout {
+  margin-top: 5%;
+  width: 'auto';
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.paper {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.stepper {
+  padding: 10px;
+}
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+.divider {
+  margin: '20px 0';
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Media query */
+@media only screen and (max-width: 1200px) {
+  /*Tablets [601px -> 1200px]*/
+  .layout {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .paper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  /*Big smartphones [426px -> 600px]*/
+  .emptyButton {
+    margin-right: 20px;
+  }
+}
+@media only screen and (max-width: 425px) {
+  /*Small smartphones [325px -> 425px]*/
+  .paper {
+    width: 100%;
+    margin-top: 60;
+  }
+}
