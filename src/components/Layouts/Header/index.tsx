@@ -25,11 +25,9 @@ const Header = () => {
 	const classes = useStyles();
 	const history = useHistory();
 
-	const gotoCheckout = () => {
-		history.push('/checkout');
+	const gotoCart = () => {
+		history.push('/cart');
 	};
-
-	console.log('cart', cart);
 
 	return (
 		<AppBar
@@ -61,7 +59,7 @@ const Header = () => {
 						<Grid item xs={5} sm={6} md={4} lg={3}>
 							{/* cart section? */}
 							<div>
-								<MenuItem onClick={gotoCheckout}>
+								<MenuItem onClick={gotoCart}>
 									<IconButton
 										aria-label="Show cart items"
 										color="primary"

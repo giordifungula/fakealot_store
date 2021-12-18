@@ -58,6 +58,32 @@ const App = () => {
 		toast.success('Item added to cart');
 	};
 
+	const updateCartQty = async (lineItemId: string, quantity: number) => {
+		const response = await commerce.cart.update(lineItemId, { quantity });
+		setCart(response.cart);
+		toast.success('Cart has been updated');
+	};
+
+	const removeFromCart = async (lineItemId: string) => {
+		const response = await commerce.cart.remove(lineItemId);
+		setCart(response.cart);
+		toast.success('Item has been removed from cart');
+	};
+
+	const handleEmptyCart = async () => {
+		const response = await commerce.cart.empty();
+
+		setCart(response.cart);
+		toast.success('Cart has been Emptied');
+	};
+
+	const refreshCart = async () => {
+		const newCart = await commerce.cart.refresh();
+
+		setCart(newCart);
+		toast.success('Cart has been refreshed');
+	};
+
 	return (
 		<BrowserRouter>
 			<ThemeProvider theme={theme}>
@@ -72,6 +98,10 @@ const App = () => {
 						setQuery,
 						query,
 						onAddToCart: addToCartClick,
+						handleEmptyCart,
+						refreshCart,
+						removeFromCart,
+						updateCartQty,
 					}}
 				>
 					<RoutesApp />
