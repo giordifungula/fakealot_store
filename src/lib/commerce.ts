@@ -6,6 +6,9 @@ console.log('REACT_APP_CHEC_PUBLIC_KEY', PUBLIC_ENV);
 const checAPIKey = PUBLIC_ENV ? PUBLIC_ENV : '';
 
 const devEnvironment = process.env.NODE_ENV === 'development';
+const prodEnv = process.env.NODE_ENV === 'production';
+console.log('devEnvironment', devEnvironment);
+console.log('prod', prodEnv);
 
 // Commerce.js constructor options
 const commerceConfig = {
@@ -25,6 +28,6 @@ if (devEnvironment && !checAPIKey) {
 
 export const commerce = new CommerceSDK(
 	checAPIKey,
-	devEnvironment,
+	prodEnv ? prodEnv : devEnvironment,
 	commerceConfig,
 );

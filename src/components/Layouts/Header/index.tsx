@@ -15,10 +15,10 @@ import {
 import GlobalContainer from 'components/utils/Container';
 // @local
 import { ShoppingCart } from '@material-ui/icons';
+import AppContext from 'AppContext';
 import useStyles from './styles';
 import Brand from './Brand';
 import Search from './Search';
-import AppContext from '../../../AppContext';
 
 const Header = () => {
 	const { isLoading, cart } = React.useContext(AppContext);
