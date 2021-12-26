@@ -31,3 +31,5 @@ export const commerce = new CommerceSDK(
 	prodEnv ? prodEnv : devEnvironment,
 	commerceConfig,
 );
+
+console.log('commerce', commerce);
