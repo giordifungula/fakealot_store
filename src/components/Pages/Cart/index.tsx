@@ -14,7 +14,7 @@ import AppContext from '../../../AppContext';
 import CartItem from './CartItem';
 import useStyles from './styles';
 
-const Page = () => {
+const Cart = () => {
 	const { cart, updateCartQty, removeFromCart, handleEmptyCart } =
 		React.useContext(AppContext);
 
@@ -141,7 +141,7 @@ const Page = () => {
 				align="center"
 				variant="h2"
 				gutterBottom
-				color="secondary"
+				color="primary"
 			>
 				Your Shopping Cart
 			</Typography>
@@ -150,4 +150,4 @@ const Page = () => {
 	);
 };
 
-export default Page;
+export default Cart;

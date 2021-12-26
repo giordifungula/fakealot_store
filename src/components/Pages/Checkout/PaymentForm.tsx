@@ -1,4 +1,6 @@
 import React from 'react';
+import { CheckoutToken } from '@chec/commerce.js/types/checkout-token';
+import { CheckoutCapture } from '@chec/commerce.js/types/checkout-capture';
 // @material-ui
 import { Typography, Button, Divider } from '@material-ui/core';
 // @stripe
@@ -11,22 +13,22 @@ import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 
 // @local
 import Review from './Review';
-import { ICheckoutTokenProps, IShippingData } from './Checkout/Checkout';
+import { IShippingData } from './Checkout';
 
-const STRIPE_ENV = process.env.STRIPE_PUBLIC_KEY;
+const STRIPE_ENV = process.env.REACT_APP_STRIPE_PUBLIC_KEY;
 
 const STRIPE_ENV_STRING = STRIPE_ENV ? STRIPE_ENV : '';
 
 const stripePromise = loadStripe(STRIPE_ENV_STRING);
 
 interface IPaymentProps {
-	checkoutToken: ICheckoutTokenProps;
+	checkoutToken: CheckoutToken;
 	nextStep: () => void;
 	backStep: () => void;
 	onCaptureCheckout: (
 		checkoutTokenId: string,
-		newOrder: unknown,
-	) => Promise<void>;
+		newOrder: CheckoutCapture,
+	) => void;
 	shippingData: IShippingData;
 }
 
@@ -64,7 +66,7 @@ const PaymentForm = ({
 					email: shippingData.email,
 				},
 				billing: {
-					name: 'International',
+					name: 'Local',
 					street: shippingData.address1,
 					town_city: shippingData.city,
 					county_state: shippingData.shippingSubdivision,
@@ -73,7 +75,7 @@ const PaymentForm = ({
 				},
 				shipping: {
 					country: shippingData.shippingCountry,
-					name: 'International',
+					name: 'Local',
 					street: shippingData.address1,
 					town_city: shippingData.city,
 				},
@@ -96,12 +98,7 @@ const PaymentForm = ({
 
 	return (
 		<>
-			<Review
-				live={checkoutToken.live}
-				adjustments={checkoutToken.adjustments}
-				cart_id={checkoutToken.cart_id}
-				id={checkoutToken.id}
-			/>
+			<Review checkoutToken={checkoutToken} />
 			<Divider />
 			<Typography variant="h6" gutterBottom style={{ margin: '20px 0' }}>
 				Payment method

@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { LineItem } from '@chec/commerce.js/types/line-item';
+import { Cart } from '@chec/commerce.js/types/cart';
+import { CheckoutCaptureResponse } from '@chec/commerce.js/types/checkout-capture-response';
 // @material-ui
 import {
 	Paper,
@@ -10,16 +14,14 @@ import {
 	Divider,
 	Button,
 } from '@material-ui/core';
-// @components
-
 // @local
-import { LineItem } from '@chec/commerce.js/types/line-item';
-import { Cart } from '@chec/commerce.js/types/cart';
-import { CheckoutCaptureResponse } from '@chec/commerce.js/types/checkout-capture-response';
-import { commerce } from '../../lib/commerce';
+import { CheckoutToken } from '@chec/commerce.js/types/checkout-token';
+import GlobalContainer from 'components/utils/Container';
+import { commerce } from '../../../../lib/commerce';
 import AddressForm from '../AddressForm';
 import PaymentForm from '../PaymentForm';
-import classes from './Checkout.module.css';
+import AppContext from '../../../../AppContext';
+import useStyles from './styles';
 
 export interface ICheckoutTokenProps {
 	adjustments: [];
@@ -63,20 +65,27 @@ interface IProps {
 	goToCartPage: () => void;
 }
 
-const Checkout = ({
-	cart,
-	onCaptureCheckout,
-	order,
-	error,
-	goToHomeView,
-	goToCartPage,
-}: IProps) => {
-	const [checkoutToken, setCheckoutToken] = useState<string | null>(null);
+const Checkout = () => {
+	const classes = useStyles();
+	const { handleCaptureCheckout } = React.useContext(AppContext);
+
+	const { cart, order, error } = React.useContext(AppContext);
+
+	const [checkoutToken, setCheckoutToken] = useState<CheckoutToken | null>(
+		null,
+	);
+
 	const [activeStep, setActiveStep] = useState(0);
+	// TODO remove shipping data
 	const [shippingData, setShippingData] = useState<IShippingData | null>(
 		null,
 	);
+
 	const [loading, setLoading] = React.useState(false);
+
+	const history = useHistory();
+	const goToHomeView = () => history.push('/');
+	const goToCartPage = () => history.push('/cart');
 
 	const nextStep = () =>
 		setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -84,17 +93,17 @@ const Checkout = ({
 		setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
 	useEffect(() => {
-		if (cart.id) {
+		if (cart) {
 			const generateToken = async () => {
 				try {
 					setLoading(true);
 
-					const token = (await commerce.checkout.generateToken(
+					const token = await commerce.checkout.generateToken(
 						cart.id,
 						{
 							type: 'cart',
 						},
-					)) as string;
+					);
 					setLoading(false);
 
 					if (token) setCheckoutToken(token);
@@ -108,7 +117,7 @@ const Checkout = ({
 
 			generateToken();
 		}
-	}, [cart]);
+	}, [JSON.stringify(cart)]);
 
 	const test = (data: IShippingData) => {
 		setShippingData(data);
@@ -152,25 +161,24 @@ const Checkout = ({
 	}
 
 	const Form = () =>
-		activeStep === 0 ? (
+		checkoutToken && activeStep === 0 ? (
 			<AddressForm
 				checkoutToken={checkoutToken}
 				nextStep={nextStep}
 				goToCartPage={goToCartPage}
-				setShippingData={setShippingData}
 				test={test}
 			/>
-		) : (
+		) : checkoutToken && shippingData ? (
 			<PaymentForm
 				checkoutToken={checkoutToken}
 				nextStep={nextStep}
 				backStep={backStep}
 				shippingData={shippingData}
-				onCaptureCheckout={onCaptureCheckout}
+				onCaptureCheckout={handleCaptureCheckout}
 			/>
-		);
+		) : null;
 	return (
-		<>
+		<GlobalContainer>
 			<div className={classes.toolbar} />
 			<main className={classes.layout}>
 				<Paper className={classes.paper}>
@@ -198,7 +206,7 @@ const Checkout = ({
 					)}
 				</Paper>
 			</main>
-		</>
+		</GlobalContainer>
 	);
 };
 

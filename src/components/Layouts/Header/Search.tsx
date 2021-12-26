@@ -24,7 +24,6 @@ const Search = () => {
 
 			searchProducts(query);
 			history.push(`/search/${query}`);
-			// todo add the search page
 		}
 	};
 
@@ -45,7 +44,7 @@ const Search = () => {
 			<Box flexGrow={1}>
 				<div className={classes.searchBox}>
 					<InputBase
-						placeholder="Search for any product, products, or brands"
+						placeholder="Search for any products, or brands"
 						value={query}
 						onChange={(e) => {
 							storeQuery(e.target.value);

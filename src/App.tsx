@@ -126,6 +126,8 @@ const App = () => {
 						removeFromCart,
 						updateCartQty,
 						handleCaptureCheckout,
+						order,
+						error: errorMessage,
 					}}
 				>
 					<RoutesApp />

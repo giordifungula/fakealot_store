@@ -1,18 +1,20 @@
 import React from 'react';
 // @material ui
 import { Typography, List, ListItem, ListItemText } from '@material-ui/core';
+import { CheckoutToken } from '@chec/commerce.js/types/checkout-token';
 
-// @local
-import { ICheckoutTokenProps } from './Checkout/Checkout';
+interface IPaymentProps {
+	checkoutToken: CheckoutToken;
+}
 
-const Review = ({ live }: ICheckoutTokenProps) => {
+const Review = ({ checkoutToken }: IPaymentProps) => {
 	return (
 		<>
 			<Typography variant="h6" gutterBottom>
 				Order summary
 			</Typography>
 			<List disablePadding>
-				{live.line_items.map((product) => (
+				{checkoutToken.live.line_items.map((product) => (
 					<ListItem style={{ padding: '10px 0' }} key={product.name}>
 						<ListItemText
 							primary={product.name}
@@ -26,7 +28,7 @@ const Review = ({ live }: ICheckoutTokenProps) => {
 				<ListItem style={{ padding: '10px 0' }}>
 					<ListItemText primary="Total" />
 					<Typography variant="subtitle1" style={{ fontWeight: 700 }}>
-						{live.subtotal.formatted_with_symbol}
+						{checkoutToken.live.subtotal.formatted_with_symbol}
 					</Typography>
 				</ListItem>
 			</List>

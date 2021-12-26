@@ -76,7 +76,7 @@ const Header = () => {
 										</Badge>
 									</IconButton>
 									<Typography variant="body1" color="primary">
-										Proceed to checkout
+										Proceed to Cart
 									</Typography>
 								</MenuItem>
 							</div>

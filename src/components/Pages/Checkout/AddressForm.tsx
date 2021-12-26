@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { GetShippingOptionsResponse } from '@chec/commerce.js/features/checkout';
+import { CheckoutToken } from '@chec/commerce.js/types/checkout-token';
 // @material-ui
 import {
 	InputLabel,
@@ -11,18 +13,23 @@ import {
 } from '@material-ui/core';
 // @Form
 import { useForm, FormProvider } from 'react-hook-form';
-
 // @local
-import { commerce } from '../../lib/commerce';
+import { commerce } from 'lib/commerce';
 import FormInput from './CustomTextField';
-import { ICheckoutTokenProps, IShippingData } from './Checkout/Checkout';
-import classes from './styles.module.css';
+import { IShippingData } from './Checkout';
+
+const useStyles = () => ({
+	spinner: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+});
 
 interface IAddresProps {
 	nextStep: () => void;
 	goToCartPage: () => void;
-	setShippingData: (data: IShippingData) => void;
-	checkoutToken: ICheckoutTokenProps;
+	checkoutToken?: CheckoutToken;
 	test: ({ ...data }: IShippingData) => void;
 }
 
@@ -41,45 +48,54 @@ type Inputs = {
 	zip: string;
 };
 
+interface IDataMap {
+	[key: string]: string;
+}
+
 const AddressForm = ({
 	nextStep,
 	goToCartPage,
-	setShippingData,
 	checkoutToken,
 	test,
 }: IAddresProps) => {
-	const [shippingCountries, setShippingCountries] = useState([]);
+	const classes = useStyles();
+
+	const [shippingCountries, setShippingCountries] = useState<IDataMap>({});
 	const [shippingCountry, setShippingCountry] = useState<string>('');
-	const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
+	const [shippingSubdivisions, setShippingSubdivisions] = useState<IDataMap>(
+		{},
+	);
 	const [shippingSubdivision, setShippingSubdivision] = useState<string>('');
-	const [shippingOptions, setShippingOptions] = useState([]);
+	const [shippingOptions, setShippingOptions] = useState<
+		GetShippingOptionsResponse[] | null
+	>(null);
 	const [shippingOption, setShippingOption] = useState<string>('');
 	const methods = useForm<Inputs>();
 	const [loading, setLoading] = React.useState(false);
 
-	const fetchShippingCountries = async (checkoutTokenId) => {
+	const fetchShippingCountries = async (checkoutTokenId: string) => {
 		const { countries } =
 			await commerce.services.localeListShippingCountries(
 				checkoutTokenId,
 			);
 
 		setShippingCountries(countries);
-		setShippingCountry(Object.keys(countries)[0]);
+		setShippingCountry('ZA');
 	};
 
-	const fetchSubdivisions = async (countryCode) => {
+	const fetchSubdivisions = async (countryCode: string) => {
 		const { subdivisions } = await commerce.services.localeListSubdivisions(
 			countryCode,
 		);
-
 		setShippingSubdivisions(subdivisions);
+
 		setShippingSubdivision(Object.keys(subdivisions)[0]);
 	};
 
 	const fetchShippingOptions = async (
-		checkoutTokenId,
-		country,
-		stateProvince = null,
+		checkoutTokenId: string,
+		country: string,
+		stateProvince = '',
 	) => {
 		const options = await commerce.checkout.getShippingOptions(
 			checkoutTokenId,
@@ -92,7 +108,9 @@ const AddressForm = ({
 
 	useEffect(() => {
 		setLoading(true);
-		fetchShippingCountries(checkoutToken.id);
+		checkoutToken
+			? fetchShippingCountries(checkoutToken.id)
+			: fetchShippingCountries('');
 		setLoading(false);
 	}, []);
 
@@ -101,13 +119,13 @@ const AddressForm = ({
 	}, [shippingCountry]);
 
 	useEffect(() => {
-		if (shippingSubdivision)
+		if (shippingSubdivision && checkoutToken)
 			fetchShippingOptions(
 				checkoutToken.id,
 				shippingCountry,
 				shippingSubdivision,
 			);
-	}, [shippingSubdivision]);
+	}, [shippingSubdivision, JSON.stringify(checkoutToken)]);
 
 	return (
 		<>
@@ -153,8 +171,17 @@ const AddressForm = ({
 								value={shippingCountry}
 								fullWidth
 								onChange={(
-									e: React.ChangeEvent<HTMLInputElement>,
-								) => setShippingCountry(e.target.value)}
+									event: React.ChangeEvent<{
+										name?: string | undefined;
+										value: unknown;
+									}>,
+									// eslint-disable-next-line @typescript-eslint/no-unused-vars
+									_child: React.ReactNode,
+								) =>
+									setShippingCountry(
+										event.target.value as string,
+									)
+								}
 							>
 								{Object.entries(shippingCountries)
 									.map(([code, name]) => ({
@@ -162,7 +189,13 @@ const AddressForm = ({
 										label: name,
 									}))
 									.map((item) => (
-										<MenuItem key={item.id} value={item.id}>
+										<MenuItem
+											key={item.id}
+											disabled={
+												item.label !== 'South Africa'
+											}
+											value={item.id}
+										>
 											{item.label}
 										</MenuItem>
 									))}
@@ -174,8 +207,17 @@ const AddressForm = ({
 								value={shippingSubdivision}
 								fullWidth
 								onChange={(
-									e: React.ChangeEvent<HTMLInputElement>,
-								) => setShippingSubdivision(e.target.value)}
+									event: React.ChangeEvent<{
+										name?: string | undefined;
+										value: unknown;
+									}>,
+									// eslint-disable-next-line @typescript-eslint/no-unused-vars
+									child: React.ReactNode,
+								) =>
+									setShippingSubdivisions(
+										event.target.value as IDataMap,
+									)
+								}
 							>
 								{Object.entries(shippingSubdivisions)
 									.map(([code, name]) => ({
@@ -195,19 +237,32 @@ const AddressForm = ({
 								value={shippingOption}
 								fullWidth
 								onChange={(
-									e: React.ChangeEvent<HTMLInputElement>,
-								) => setShippingOption(e.target.value)}
+									event: React.ChangeEvent<{
+										name?: string | undefined;
+										value: unknown;
+									}>,
+									// eslint-disable-next-line @typescript-eslint/no-unused-vars
+									child: React.ReactNode,
+								) =>
+									setShippingOption(
+										event.target.value as string,
+									)
+								}
 							>
-								{shippingOptions
-									.map((sO) => ({
-										id: sO.id,
-										label: `${sO.description} - (${sO.price.formatted_with_symbol})`,
-									}))
-									.map((item) => (
-										<MenuItem key={item.id} value={item.id}>
-											{item.label}
-										</MenuItem>
-									))}
+								{shippingOptions &&
+									shippingOptions
+										.map((sO) => ({
+											id: sO.id,
+											label: `National Shipping - (${sO.price.formatted_with_symbol})`,
+										}))
+										.map((item) => (
+											<MenuItem
+												key={item.id}
+												value={item.id}
+											>
+												{item.label}
+											</MenuItem>
+										))}
 							</Select>
 						</Grid>
 					</Grid>

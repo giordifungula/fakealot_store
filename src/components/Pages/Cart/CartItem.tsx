@@ -8,7 +8,6 @@ import {
 	CardContent,
 	CardMedia,
 } from '@material-ui/core';
-
 // @local
 import { LineItem } from '@chec/commerce.js/types/line-item';
 import useStyles from './styles';

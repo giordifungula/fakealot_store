@@ -1,8 +1,8 @@
 import { createContext } from 'react';
 import { Product } from '@chec/commerce.js/types/product';
 import { Cart } from '@chec/commerce.js/types/cart';
-import { Order } from '@chec/commerce.js/types/order';
 import { CheckoutCapture } from '@chec/commerce.js/types/checkout-capture';
+import { CheckoutCaptureResponse } from '@chec/commerce.js/types/checkout-capture-response';
 
 interface IAppContext {
 	isLoading: boolean;
@@ -18,6 +18,8 @@ interface IAppContext {
 	removeFromCart: (productId: string) => void;
 	updateCartQty: (productId: string, quantity: number) => void;
 	handleCaptureCheckout: (tokenId: string, newOrder: CheckoutCapture) => void;
+	order: CheckoutCaptureResponse | null;
+	error: unknown | string;
 }
 
 const defaultState: IAppContext = {
@@ -34,6 +36,8 @@ const defaultState: IAppContext = {
 	removeFromCart: (productId: string) => true,
 	updateCartQty: (productId: string, quantity: number) => true,
 	handleCaptureCheckout: (tokenId: string, newOrder: CheckoutCapture) => true,
+	order: null,
+	error: '',
 };
 
 export default createContext<IAppContext>(defaultState);
