@@ -101,9 +101,10 @@ const AddressForm = ({
 			checkoutTokenId,
 			{ country, region: stateProvince },
 		);
+		console.log('options', options);
 
 		setShippingOptions(options);
-		setShippingOption(options[0].id);
+		// setShippingOption(options[0].id);
 	};
 
 	useEffect(() => {
@@ -175,8 +176,7 @@ const AddressForm = ({
 										name?: string | undefined;
 										value: unknown;
 									}>,
-									// eslint-disable-next-line @typescript-eslint/no-unused-vars
-									_child: React.ReactNode,
+									child: React.ReactNode,
 								) =>
 									setShippingCountry(
 										event.target.value as string,
@@ -211,11 +211,10 @@ const AddressForm = ({
 										name?: string | undefined;
 										value: unknown;
 									}>,
-									// eslint-disable-next-line @typescript-eslint/no-unused-vars
 									child: React.ReactNode,
 								) =>
-									setShippingSubdivisions(
-										event.target.value as IDataMap,
+									setShippingSubdivision(
+										event.target.value as string,
 									)
 								}
 							>
@@ -225,7 +224,10 @@ const AddressForm = ({
 										label: name,
 									}))
 									.map((item) => (
-										<MenuItem key={item.id} value={item.id}>
+										<MenuItem
+											key={item.id}
+											value={item.label}
+										>
 											{item.label}
 										</MenuItem>
 									))}

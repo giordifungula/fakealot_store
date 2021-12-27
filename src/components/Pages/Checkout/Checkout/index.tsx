@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { LineItem } from '@chec/commerce.js/types/line-item';
-import { Cart } from '@chec/commerce.js/types/cart';
-import { CheckoutCaptureResponse } from '@chec/commerce.js/types/checkout-capture-response';
 // @material-ui
 import {
 	Paper,
@@ -17,18 +14,11 @@ import {
 // @local
 import { CheckoutToken } from '@chec/commerce.js/types/checkout-token';
 import GlobalContainer from 'components/utils/Container';
-import { commerce } from '../../../../lib/commerce';
+import { commerce } from 'lib/commerce';
+import AppContext from 'AppContext';
 import AddressForm from '../AddressForm';
 import PaymentForm from '../PaymentForm';
-import AppContext from '../../../../AppContext';
 import useStyles from './styles';
-
-export interface ICheckoutTokenProps {
-	adjustments: [];
-	cart_id: string;
-	live: ILiveProps;
-	id: string;
-}
 
 export interface IShippingData {
 	shippingCountry: string;
@@ -43,27 +33,7 @@ export interface IShippingData {
 	zip: string;
 }
 
-export interface ILiveProps {
-	merchant_id: string;
-	currency: { code: string; symbol: string };
-	subtotal: { formatted_with_symbol: string };
-	total: number;
-	line_items: LineItem[];
-}
-
 const steps = ['Shipping address', 'Payment details'];
-
-interface IProps {
-	cart: Cart;
-	onCaptureCheckout: (
-		checkoutTokenId: string,
-		newOrder: unknown,
-	) => Promise<void>;
-	error: string;
-	order: CheckoutCaptureResponse;
-	goToHomeView: () => void;
-	goToCartPage: () => void;
-}
 
 const Checkout = () => {
 	const classes = useStyles();
@@ -121,6 +91,7 @@ const Checkout = () => {
 
 	const test = (data: IShippingData) => {
 		setShippingData(data);
+		console.log('test', data);
 		nextStep();
 	};
 
