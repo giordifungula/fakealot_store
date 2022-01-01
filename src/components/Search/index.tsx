@@ -1,10 +1,10 @@
 import React from 'react';
 // @components
 import GlobalContainer from 'components/utils/Container';
+import AppContext from 'AppContext';
 import Query from './Query';
 import CurrentPath from './CurrentPage';
 import { Banner } from './Banner';
-import AppContext from '../../AppContext';
 
 const SearchContainer = () => {
 	const { sortedProducts, query } = React.useContext(AppContext);

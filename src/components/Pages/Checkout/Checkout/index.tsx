@@ -91,7 +91,6 @@ const Checkout = () => {
 
 	const test = (data: IShippingData) => {
 		setShippingData(data);
-		console.log('test', data);
 		nextStep();
 	};
 
