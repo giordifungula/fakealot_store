@@ -85,7 +85,7 @@ const ProductsGallery = ({ products, title, loading }: IGalleryProps) => {
 														key={i}
 														style={{
 															height: '300px',
-															width: '90%',
+															width: '100%',
 														}}
 														component="img"
 														alt={product.name}

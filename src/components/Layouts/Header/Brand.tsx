@@ -9,11 +9,12 @@ import Drawer from './Drawer';
 const useStyles = makeStyles(() => ({
 	root: {
 		display: 'flex',
-		height: '48px',
+		height: '80px',
 		margin: '10px auto',
 	},
 	logo: {
-		height: '30px',
+		height: '100px',
+		width: '100px',
 		'@media (max-width: 600px)': {
 			height: '25px',
 		},
@@ -48,11 +49,10 @@ const Brand = () => {
 					textAlign: 'center',
 				}}
 			>
-				<span className={classes.FTextStyles}>F</span>
 				<img
 					className={classes.logo}
 					style={{ marginLeft: '1px' }}
-					src={logo}
+					src="./images/giordiStore.png"
 					alt="brand-logo"
 				/>
 			</Link>

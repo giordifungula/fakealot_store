@@ -12,8 +12,7 @@ import {
 } from '@material-ui/core';
 import { GiHamburgerMenu } from 'react-icons/gi';
 // @local
-import logo from '../../../assets/logo.png';
-import { categories } from '../../../Data/categories';
+import { categories } from 'Data/categories';
 
 const useStyles = makeStyles({
 	list: {
@@ -69,7 +68,11 @@ const Drawer = () => {
 		>
 			<div className={classes.brand}>
 				<Link to="/">
-					<img className={classes.logo} src={logo} alt="brand-logo" />
+					<img
+						className={classes.logo}
+						src={'./images/giordiStore.png'}
+						alt="brand-logo"
+					/>
 				</Link>
 			</div>
 			<Divider />

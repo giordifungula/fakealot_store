@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 		gridTemplateColumns: '1fr 4fr 1fr',
 		gridGap: 20,
 		marginBottom: 16,
-		marginTop: `${76 + 8}px`,
+		marginTop: `${120}px`,
 		'@media (max-width: 1280px)': {
 			gridTemplateColumns: '1fr 5fr',
 		},
