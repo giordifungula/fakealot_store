@@ -1,27 +1,19 @@
 import React from 'react';
-import {
-	Switch,
-	withRouter,
-	RouteComponentProps,
-	Route,
-	Redirect,
-} from 'react-router-dom';
+import { Switch, withRouter, Route, Redirect } from 'react-router-dom';
 // @components
 import Home from 'components/Home';
 import Header from 'components/Layouts/Header';
-import About from 'components/About';
 import SearchContainer from 'components/Search';
 import Product from 'components/Pages/Product';
 import Cart from 'components/Pages/Cart';
 import Checkout from 'components/Pages/Checkout/Checkout';
 
-const App = ({ location }: RouteComponentProps) => {
+const App = () => {
 	return (
 		<>
 			<Header />
 			<Switch>
 				<Route exact path="/" component={Home} />
-				<Route exact path="/about" component={About} />
 				<Route exact path="/search/:name" component={SearchContainer} />
 				<Route exact path="/product/:name/:id" component={Product} />
 				<Route exact path="/cart" component={Cart} />

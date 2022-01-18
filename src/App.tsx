@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Product } from '@chec/commerce.js/types/product';
 import { Cart } from '@chec/commerce.js/types/cart';
-import { Order } from '@chec/commerce.js/types/order';
 import { CheckoutCapture } from '@chec/commerce.js/types/checkout-capture';
 import { CheckoutCaptureResponse } from '@chec/commerce.js/types/checkout-capture-response';
 // @material-ui
@@ -39,12 +38,15 @@ const App = () => {
 	};
 
 	const fetchProducts = async () => {
-		const response = await commerce.products.list();
-		setIsLoading(true);
-		const { data } = response;
-		// response returns data and meta.pagination to collect
-		setProductsList(data);
-		setIsLoading(false);
+		try {
+			const products = await commerce.products.list();
+
+			const { data } = products;
+			setProductsList(data);
+			setIsLoading;
+		} catch (error) {
+			setErrorMessage(error);
+		}
 	};
 
 	const fetchCart = async () => {
@@ -100,10 +102,9 @@ const App = () => {
 			);
 			setOrder(incomingOrder);
 			refreshCart();
-		} catch (error: unknown) {
+		} catch (error) {
 			console.log('error', error);
-			// const errorMessage = error.message || error;
-			// setErrorMessage(error.data.error.message);
+			setErrorMessage(error);
 		}
 	};
 

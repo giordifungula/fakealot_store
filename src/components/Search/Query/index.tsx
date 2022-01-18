@@ -5,7 +5,7 @@ import { useHistory, useParams, Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
 	root: {
 		marginTop: `${76}px`,
 		marginBottom: 16,

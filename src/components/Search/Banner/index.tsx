@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import {
 	Paper,
 	Card,
-	Divider,
 	Typography,
 	CardActionArea,
 	CardMedia,
@@ -18,17 +17,10 @@ interface IProps {
 	title?: string;
 	getProduct?: Product | null;
 	xs?: boolean | GridSize;
-	numOfProds: number;
 	products: Product[] | null;
 }
 
-export const Banner = ({
-	products,
-	title,
-	numOfProds = 6,
-	xs = 2,
-	getProduct,
-}: IProps) => {
+export const Banner = ({ products, title, xs = 2 }: IProps) => {
 	const classes = useStyles({});
 
 	return (

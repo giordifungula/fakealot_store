@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/styles';
-import logo from '../../img/image-placeholders.jpg';
 
 export default makeStyles((theme) => ({
 	paper: {

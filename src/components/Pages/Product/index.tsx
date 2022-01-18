@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { Product } from '@chec/commerce.js/types/product';
 import { useParams } from 'react-router-dom';
 // @components
@@ -26,7 +26,8 @@ import {
 } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import { AddShoppingCart, Star } from '@material-ui/icons';
-import AppContext from '../../../AppContext';
+// @local
+import AppContext from 'AppContext';
 
 const useStyles = makeStyles((theme) => ({
 	actionCard: {},
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 const FetchProduct = () => {
 	const classes = useStyles();
 
-	const { onAddToCart, isLoading } = React.useContext(AppContext);
+	const { onAddToCart } = React.useContext(AppContext);
 
 	const { id } = useParams<{ id: string }>();
 	const [product, setProduct] = React.useState<Product | null>(null);
@@ -78,7 +79,6 @@ const FetchProduct = () => {
 			console.log('{error}', error);
 		}
 	};
-	console.log('isLoading', loading);
 
 	React.useEffect(() => {
 		getProduct(id);

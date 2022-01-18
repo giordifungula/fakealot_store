@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 // @material-ui
 import { Box, InputBase, Button } from '@material-ui/core/';
 import SearchIcon from '@material-ui/icons/Search';
+import AppContext from 'AppContext';
 // @local
 import useStyles from './styles';
-import AppContext from '../../../AppContext';
 
 const Search = () => {
 	const { searchProducts, setQuery, query } = React.useContext(AppContext);
@@ -27,7 +27,6 @@ const Search = () => {
 		}
 	};
 
-	// todo add types here
 	const handleKeyPress = (event: any) => {
 		if (event.key === 'Enter') {
 			search();

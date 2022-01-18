@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 // @material-ui
 import { makeStyles } from '@material-ui/core/styles';
 // @local
-import logo from '../../../assets/logo.png';
 import Drawer from './Drawer';
 
 const useStyles = makeStyles(() => ({
