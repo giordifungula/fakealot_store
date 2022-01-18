@@ -53,6 +53,6 @@ Why am I building this application
 
 # How to test payment gateway
 
--   Type 4242424242424242 until you cannot enter any more digits and you can proceed to checkout.
+-   Type 42424242424242424 until you cannot enter any more digits and you can proceed to checkout.
 
 Giordi Fungula
